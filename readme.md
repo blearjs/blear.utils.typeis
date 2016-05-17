@@ -1,1 +1,1 @@
-# blearjs 样板
+# typeis
