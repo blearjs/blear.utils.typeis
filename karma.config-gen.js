@@ -8,10 +8,6 @@
 'use strict';
 
 
-// 需要测试的文件
-var TEST_FILES = './test/classes/test.class.js';
-
-
 var fs = require('fs');
 var path = require('path');
 
@@ -28,7 +24,7 @@ module.exports = function (coverage) {
     if (coverage) {
         preprocessors = {
             // 原始模块，需要测试覆盖率
-            './index.js': ['coverage']
+            './src/index.js': ['coverage']
         };
         reporters.push('coverage');
     }
@@ -67,6 +63,16 @@ module.exports = function (coverage) {
                     included: false
                 },
                 {
+                    // 加载 node_modules 下的原始文件，但不直接引入，使用模块加载器引入
+                    pattern: './node_modules/lodash/package.json',
+                    included: false
+                },
+                {
+                    // 加载 node_modules 下的原始文件，但不直接引入，使用模块加载器引入
+                    pattern: './node_modules/lodash/lodash.js',
+                    included: false
+                },
+                {
                     // 加载 src 下的原始文件，但不直接引入，使用模块加载器引入
                     pattern: './test/test.**',
                     included: false
@@ -75,9 +81,7 @@ module.exports = function (coverage) {
                     // 加载 test 下的入口文件，但不直接引入，使用模块加载器引入
                     pattern: './test/main.js',
                     included: true
-                },
-                // 直接引入测试主文件
-                TEST_FILES
+                }
             ],
 
 
