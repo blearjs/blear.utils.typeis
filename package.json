@@ -1,7 +1,7 @@
 {
   "name": "blear.utils.typeis",
   "version": "1.0.1",
-  "description": "blear.utils.typeis description",
+  "description": "typeis utils",
   "scripts": {
     "live": "browser-sync start --config bs-config.js",
     "test": "node ./node_modules/.bin/karma start --single-run --browsers PhantomJS --reporters progress"
@@ -14,6 +14,10 @@
   },
   "main": "src/index.js",
   "keywords": [
+    "blear",
+    "utils",
+    "typeis",
+    "typeof",
     "cloudcome",
     "ydr.me"
   ],
