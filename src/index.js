@@ -142,15 +142,6 @@ typeis.Null = makeExports('null');
 typeis.Undefined = makeExports('undefined');
 
 /**
- * 判断是否为 null 或 undefined
- * @param any {*} 待判断对象
- * @type {Function}
- */
-typeis.None = function (any) {
-    return typeis.Null(any) || typeis.Undefined(any);
-};
-
-/**
  * 判断是否为 regexp
  * @param any {*} 待判断对象
  * @type {Function}

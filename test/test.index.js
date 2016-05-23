@@ -80,18 +80,6 @@ describe('typeis', function () {
         done();
     });
 
-    it('.None', function (done) {
-        expect(typeis.None(NaN)).toBe(false);
-        expect(typeis.None(null)).toBe(true);
-        expect(typeis.None()).toBe(false);
-        expect(typeis.None(NaN)).toBe(false);
-        expect(typeis.None(null)).toBe(false);
-        expect(typeis.None(undefined)).toBe(true);
-        expect(typeis.None()).toBe(true);
-
-        done();
-    });
-
     it('.Regexp', function (done) {
         expect(typeis.Regexp(/./)).toBe(true);
         expect(typeis.RegExp(/./)).toBe(true);
