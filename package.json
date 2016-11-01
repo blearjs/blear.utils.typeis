@@ -1,6 +1,6 @@
 {
   "name": "blear.utils.typeis",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "typeis utils",
   "scripts": {
     "live": "browser-sync start --config bs-config.js",

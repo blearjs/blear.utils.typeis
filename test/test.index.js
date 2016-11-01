@@ -122,7 +122,8 @@ describe('typeis', function () {
 
     it('.Nan', function (done) {
         expect(typeis.Nan(NaN)).toBe(true);
-        expect(typeis.NaN(NaN)).toBe(true);
+        expect(typeis.NaN(-1)).toBe(false);
+        expect(typeis.NaN(+1)).toBe(false);
         expect(typeis.Nan(Number('=='))).toBe(true);
         expect(typeis.NaN(Number('=='))).toBe(true);
         expect(typeis.Nan()).toBe(false);

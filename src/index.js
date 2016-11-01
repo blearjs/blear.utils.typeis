@@ -1,6 +1,22 @@
 'use strict';
 
-var UDF = 'undefined';
+var UNDEFINED = 'undefined';
+var FUNCTION = 'function';
+var NUMBER = 'number';
+var GLOBAL = 'global';
+var WINDOW = 'window';
+var DOCUMENT = 'document';
+var ELEMENT = 'element';
+var NAN = 'nan';
+var ARGUMENTS = 'arguments';
+var DATE = 'date';
+var ERROR = 'error';
+var NULL = 'null';
+var OBJECT = 'object';
+var STRING = 'string';
+var ARRAY = 'array';
+var REGEXP = 'regexp';
+var BOOLEAN = 'boolean';
 
 
 //ELEMENT_NODE:1
@@ -24,8 +40,6 @@ var UDF = 'undefined';
 //DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC:32
 
 
-
-
 /**
  * 测试 arguments
  * @returns {boolean}
@@ -43,34 +57,44 @@ var testArguments = function (args) {
  * @returns {string}
  */
 var typeis = module.exports = function (any) {
-    if (typeof any === UDF) {
-        return UDF;
-    } else if (any && any === any.window) {
-        return 'window';
+    if (typeof any === UNDEFINED) {
+        return UNDEFINED;
     }
-    //else if (any && any === any.global) {
-    //    return 'global';
-    //}
-    else if (typeof document !== UDF && any === document) {
-        return 'document';
-    } else if (any === null) {
-        return 'null';
-    } else if (any !== any) {
-        return 'nan';
+
+    if (typeof window !== UNDEFINED && any === window) {
+        return WINDOW;
+    }
+
+    if (typeof global !== UNDEFINED && any === global) {
+        return GLOBAL;
+    }
+
+    if (typeof document !== UNDEFINED && any === document) {
+        return DOCUMENT;
+    }
+
+    if (any === null) {
+        return NULL;
+    }
+
+    // -1 !== +1
+    // NaN !== NaN
+    if (any !== any) {
+        return NAN;
     }
 
     var ret = Object.prototype.toString.call(any).slice(8, -1).toLowerCase();
 
     // android 5.0+ element 对象的 toString 不为 [Object HTMLElement...]
     if (any.nodeType === 1 && any.nodeName) {
-        return 'element';
+        return ELEMENT;
     }
 
     try {
         // @fuckie arguments 返回的是 object
         /* istanbul ignore next */
-        if (ret === 'object' && 'callee' in any && testArguments(any)) {
-            return 'arguments';
+        if (ret === OBJECT && 'callee' in any && testArguments(any)) {
+            return ARGUMENTS;
         }
     } catch (err) {
         // ignore
@@ -97,63 +121,63 @@ var makeExports = function (type) {
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.String = makeExports('string');
+typeis.String = makeExports(STRING);
 
 /**
  * 判断是否为 number
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Number = makeExports('number');
+typeis.Number = makeExports(NUMBER);
 
 /**
  * 判断是否为 array
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Array = makeExports('array');
+typeis.Array = makeExports(ARRAY);
 
 /**
  * 判断是否为 object
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Object = makeExports('object');
+typeis.Object = makeExports(OBJECT);
 
 /**
  * 判断是否为 function
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Function = makeExports('function');
+typeis.Function = makeExports(FUNCTION);
 
 /**
  * 判断是否为 null
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Null = makeExports('null');
+typeis.Null = makeExports(NULL);
 
 /**
  * 判断是否为 undefined
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Undefined = makeExports('undefined');
+typeis.Undefined = makeExports(UNDEFINED);
 
 /**
  * 判断是否为 regexp
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Regexp = typeis.RegExp = makeExports('regexp');
+typeis.Regexp = typeis.RegExp = makeExports(REGEXP);
 
 /**
  * 判断是否为 boolean
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Boolean = makeExports('boolean');
+typeis.Boolean = makeExports(BOOLEAN);
 
 ///**
 // * 判断是否为 global
@@ -167,46 +191,46 @@ typeis.Boolean = makeExports('boolean');
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Window = makeExports('window');
+typeis.Window = makeExports(WINDOW);
 
 /**
  * 判断是否为 document
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Document = makeExports('document');
+typeis.Document = makeExports(DOCUMENT);
 
 /**
  * 判断是否为 element
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Element = makeExports('element');
+typeis.Element = makeExports(ELEMENT);
 
 /**
  * 判断是否为 nan
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Nan = typeis.NaN = makeExports('nan');
+typeis.Nan = typeis.NaN = makeExports(NAN);
 
 /**
  * 判断是否为 arguments
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Arguments = makeExports('arguments');
+typeis.Arguments = makeExports(ARGUMENTS);
 
 /**
  * 判断是否为 date
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Date = makeExports('date');
+typeis.Date = makeExports(DATE);
 
 /**
  * 判断是否为 error
  * @param any {*} 待判断对象
  * @type {Function}
  */
-typeis.Error = makeExports('error');
+typeis.Error = makeExports(ERROR);
